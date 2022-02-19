@@ -1,0 +1,24 @@
+<mat-sidenav-container fxLayout="row" fxFill>
+  <mat-sidenav #sidenav mode="side">
+    <mat-tab-group mat-align-tabs="start" selectedIndex="0">
+      <mat-tab label="Features"><classifieds-ui-ad-features-filter [(searchForm)]="searchForm" [adType]="adType"></classifieds-ui-ad-features-filter></mat-tab>
+      <mat-tab label="Filters"><classifieds-ui-ad-attributes-filter [(searchForm)]="searchForm" [adType]="adType"></classifieds-ui-ad-attributes-filter></mat-tab>
+    </mat-tab-group>
+  </mat-sidenav>
+  <mat-sidenav-content fxLayout="row" fxFill>
+    <div fxLayout="column" fxFill>
+      <div class="topbar">
+          <div fxFlex fxLayout="row" fxFill>
+            <button mat-button (click)="sidenav.toggle()" class="filter-btn"><i class="fas fa-filter"></i></button>
+            <classifieds-ui-ad-search-bar fxFlex="100" [hidden]="hideSearchBar" [(searchForm)]="searchForm" [adType]="adType"></classifieds-ui-ad-search-bar>
+          </div>
+      </div>
+      <div fxFlex fxLayout="row" fxFill>
+        <span [fxFlex]="spacerGap"></span>
+        <classifieds-ui-ad-master [fxFlex]="hideRouterOutlet ? 100 : 30" [hidden]="hideMasterComponent" [searchForm]="searchForm" [adType]="adType"></classifieds-ui-ad-master>
+        <div class="router-outlet" [fxFlex]="hideMasterComponent ? 100 : 70" [hidden]="hideRouterOutlet"><router-outlet></router-outlet></div>
+        <span [fxFlex]="spacerGap"></span>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,41 @@
+mat-tab-group {
+  height: 100%;
+}
+
+.loader-overlay {
+  background-color: rgba(255, 255, 255, .6);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.attributes {
+  margin: 0;
+  padding: 0;
+}
+
+.attributes li {
+  margin: 0 1em 0 0;
+  padding: o;
+  display: inline-block;
+}
+
+:host {
+  color: black;
+}
+
+.ad-detail-wrapper {
+  //background-color: rgb(171, 204, 219);
+  padding: 2em;
+  border-left: 1px solid white;
+  background-color: white;
+}
+
+h1 {
+  color: rgb(16, 14, 121);
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: .1em;
+}

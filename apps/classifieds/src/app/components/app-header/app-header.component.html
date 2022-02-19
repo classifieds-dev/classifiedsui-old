@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <button mat-button (click)="menuClick()"><i class="fas fa-bars"></i></button>
+    <!-- <span class="brand">GalADika</span> -->
+    <span class="brand">classifieds</span>
+    <!-- <span class="spacer"></span> -->
+    <a mat-button *ngIf="!isAuthenticated">register</a>
+    <a mat-raised-button color="accent" *ngIf="!isAuthenticated" (click)="login()">login</a>
+    <!-- <a mat-raised-button color="accent" *ngIf="isAuthenticated" routerLink="/ads/nop/create-ad">create ad</a> -->
+    <a class="create-ad" mat-raised-button color="accent" routerLink="/ads/nop/create-ad"><i class="fas fa-plus-circle"></i></a>
+</mat-toolbar>

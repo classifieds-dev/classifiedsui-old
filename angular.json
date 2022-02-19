@@ -1,0 +1,1013 @@
+{
+  "version": 1,
+  "projects": {
+    "classifieds": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/classifieds",
+      "sourceRoot": "apps/classifieds/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/classifieds",
+            "index": "apps/classifieds/src/index.html",
+            "main": "apps/classifieds/src/main.ts",
+            "polyfills": "apps/classifieds/src/polyfills.ts",
+            "tsConfig": "apps/classifieds/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/classifieds/src/favicon.ico",
+              "apps/classifieds/src/assets",
+              "apps/classifieds/src/silent-refresh.html"
+            ],
+            "styles": [
+              "node_modules/@nebular/theme/styles/prebuilt/default.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/classifieds/src/styles.scss",
+              "apps/classifieds/src/theme.scss"
+            ],
+            "scripts": [
+              "node_modules/marked/lib/marked.js",
+              {
+                "input": "node_modules/oidc-client/dist/oidc-client.js",
+                "inject": false,
+                "bundleName": "oidc-client"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "local.dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.local.dev.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "classifieds:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "classifieds:build:production"
+            },
+            "dev": {
+              "browserTarget": "classifieds:build:dev"
+            },
+            "local.dev": {
+              "browserTarget": "classifieds:build:local.dev"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "classifieds:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/classifieds/tsconfig.app.json",
+              "apps/classifieds/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/classifieds/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/classifieds/jest.config.js",
+            "tsConfig": "apps/classifieds/tsconfig.spec.json",
+            "setupFile": "apps/classifieds/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/apps/classifieds/server",
+            "main": "apps/classifieds/src/main.server.ts",
+            "tsConfig": "apps/classifieds/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "bundleDependencies": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            },
+            "dev": {
+              "outputHashing": "media",
+              "bundleDependencies": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.dev.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            },
+            "local.dev": {
+              "outputHashing": "media",
+              "bundleDependencies": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds/src/environments/environment.ts",
+                  "with": "apps/classifieds/src/environments/environment.local.dev.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        }
+      }
+    },
+    "classifieds-e2e": {
+      "root": "apps/classifieds-e2e",
+      "sourceRoot": "apps/classifieds-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/classifieds-e2e/cypress.json",
+            "tsConfig": "apps/classifieds-e2e/tsconfig.e2e.json",
+            "devServerTarget": "classifieds:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "classifieds:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/classifieds-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/classifieds-e2e/**"]
+          }
+        }
+      }
+    },
+    "ads": {
+      "projectType": "library",
+      "root": "libs/ads",
+      "sourceRoot": "libs/ads/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ads/tsconfig.lib.json",
+              "libs/ads/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ads/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ads/jest.config.js",
+            "tsConfig": "libs/ads/tsconfig.spec.json",
+            "setupFile": "libs/ads/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/auth/tsconfig.lib.json",
+              "libs/auth/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/auth/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "tsConfig": "libs/auth/tsconfig.spec.json",
+            "setupFile": "libs/auth/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "media": {
+      "projectType": "library",
+      "root": "libs/media",
+      "sourceRoot": "libs/media/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/media/tsconfig.lib.json",
+              "libs/media/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/media/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/media/jest.config.js",
+            "tsConfig": "libs/media/tsconfig.spec.json",
+            "setupFile": "libs/media/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "utils": {
+      "projectType": "library",
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/utils/tsconfig.lib.json",
+              "libs/utils/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/utils/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "tsConfig": "libs/utils/tsconfig.spec.json",
+            "setupFile": "libs/utils/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
+            "tsConfig": "libs/material/tsconfig.spec.json",
+            "setupFile": "libs/material/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "logging": {
+      "projectType": "library",
+      "root": "libs/logging",
+      "sourceRoot": "libs/logging/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logging/tsconfig.lib.json",
+              "libs/logging/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/logging/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logging/jest.config.js",
+            "tsConfig": "libs/logging/tsconfig.spec.json",
+            "setupFile": "libs/logging/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "cities": {
+      "projectType": "library",
+      "root": "libs/cities",
+      "sourceRoot": "libs/cities/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/cities/tsconfig.lib.json",
+              "libs/cities/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/cities/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/cities/jest.config.js",
+            "tsConfig": "libs/cities/tsconfig.spec.json",
+            "setupFile": "libs/cities/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "chat": {
+      "projectType": "library",
+      "root": "libs/chat",
+      "sourceRoot": "libs/chat/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/chat/tsconfig.lib.json",
+              "libs/chat/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/chat/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/chat/jest.config.js",
+            "tsConfig": "libs/chat/tsconfig.spec.json",
+            "setupFile": "libs/chat/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "taxonomy": {
+      "projectType": "library",
+      "root": "libs/taxonomy",
+      "sourceRoot": "libs/taxonomy/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/taxonomy/tsconfig.lib.json",
+              "libs/taxonomy/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/taxonomy/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/taxonomy/jest.config.js",
+            "tsConfig": "libs/taxonomy/tsconfig.spec.json",
+            "setupFile": "libs/taxonomy/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "vocabulary": {
+      "projectType": "library",
+      "root": "libs/vocabulary",
+      "sourceRoot": "libs/vocabulary/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/vocabulary/tsconfig.lib.json",
+              "libs/vocabulary/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/vocabulary/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/vocabulary/jest.config.js",
+            "tsConfig": "libs/vocabulary/tsconfig.spec.json",
+            "setupFile": "libs/vocabulary/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "attributes": {
+      "projectType": "library",
+      "root": "libs/attributes",
+      "sourceRoot": "libs/attributes/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/attributes/tsconfig.lib.json",
+              "libs/attributes/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/attributes/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/attributes/jest.config.js",
+            "tsConfig": "libs/attributes/tsconfig.spec.json",
+            "setupFile": "libs/attributes/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "autos": {
+      "projectType": "library",
+      "root": "libs/autos",
+      "sourceRoot": "libs/autos/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/autos/tsconfig.lib.json",
+              "libs/autos/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/autos/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/autos/jest.config.js",
+            "tsConfig": "libs/autos/tsconfig.spec.json",
+            "setupFile": "libs/autos/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "classifieds-ssr": {
+      "root": "apps/classifieds-ssr",
+      "sourceRoot": "apps/classifieds-ssr/src",
+      "projectType": "application",
+      "prefix": "classifieds-ssr",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "buildLibsFromSource": true,
+            "externalDependencies": [
+              "../../../dist/apps/classifieds/server/main"
+            ],
+            "outputPath": "dist/apps/classifieds-ssr",
+            "main": "apps/classifieds-ssr/src/main.ts",
+            "tsConfig": "apps/classifieds-ssr/tsconfig.app.json",
+            "assets": ["apps/classifieds-ssr/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds-ssr/src/environments/environment.ts",
+                  "with": "apps/classifieds-ssr/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "classifieds-ssr:serve"
+          }
+        },
+        "build-all": {
+          "builder": "@angular-devkit/architect:concat",
+          "options": {
+            "targets": [
+              {
+                "target": "classifieds:build"
+              },
+              {
+                "target": "classifieds:server"
+              },
+              {
+                "target": "classifieds-ssr:build"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/classifieds-ssr/tsconfig.app.json",
+              "apps/classifieds-ssr/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/classifieds-ssr/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/classifieds-ssr/jest.config.js",
+            "tsConfig": "apps/classifieds-ssr/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "classifieds-lambda": {
+      "root": "apps/classifieds-lambda",
+      "sourceRoot": "apps/classifieds-lambda/src",
+      "projectType": "application",
+      "prefix": "classifieds-lambda",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "optimization": false,
+            "buildLibsFromSource": true,
+            "externalDependencies": [
+              "../../../dist/apps/classifieds/server/main"
+            ],
+            "outputPath": "dist/apps/classifieds-lambda",
+            "main": "apps/classifieds-lambda/src/main.ts",
+            "tsConfig": "apps/classifieds-lambda/tsconfig.app.json",
+            "assets": ["apps/classifieds-lambda/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/classifieds-lambda/src/environments/environment.ts",
+                  "with": "apps/classifieds-lambda/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "classifieds-lambda:serve"
+          }
+        },
+        "build-all": {
+          "builder": "@angular-devkit/architect:concat",
+          "options": {
+            "targets": [
+              {
+                "target": "classifieds:build"
+              },
+              {
+                "target": "classifieds:server"
+              },
+              {
+                "target": "classifieds-lambda:build"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/classifieds-lambda/tsconfig.app.json",
+              "apps/classifieds-lambda/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/classifieds-lambda/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/classifieds-lambda/jest.config.js",
+            "tsConfig": "apps/classifieds-lambda/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "realestate": {
+      "projectType": "library",
+      "root": "libs/realestate",
+      "sourceRoot": "libs/realestate/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/realestate/tsconfig.lib.json",
+              "libs/realestate/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/realestate/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/realestate/jest.config.js",
+            "tsConfig": "libs/realestate/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/realestate/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "libs-profiles": {
+      "projectType": "library",
+      "root": "libs/profiles",
+      "sourceRoot": "libs/profiles/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profiles/tsconfig.lib.json",
+              "libs/profiles/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/profiles/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profiles/jest.config.js",
+            "tsConfig": "libs/profiles/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profiles/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "jsonschema": {
+      "projectType": "library",
+      "root": "libs/jsonschema",
+      "sourceRoot": "libs/jsonschema/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/jsonschema/tsconfig.lib.json",
+              "libs/jsonschema/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/jsonschema/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/jsonschema/jest.config.js",
+            "tsConfig": "libs/jsonschema/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/jsonschema/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "pages": {
+      "projectType": "library",
+      "root": "libs/pages",
+      "sourceRoot": "libs/pages/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/pages/tsconfig.lib.json",
+              "libs/pages/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/pages/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/pages/jest.config.js",
+            "tsConfig": "libs/pages/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/pages/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "content": {
+      "projectType": "library",
+      "root": "libs/content",
+      "sourceRoot": "libs/content/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/content/tsconfig.lib.json",
+              "libs/content/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/content/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/content/jest.config.js",
+            "tsConfig": "libs/content/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/content/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "token": {
+      "projectType": "library",
+      "root": "libs/token",
+      "sourceRoot": "libs/token/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/token/tsconfig.lib.json",
+              "libs/token/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/token/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/token/jest.config.js",
+            "tsConfig": "libs/token/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/token/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "style": {
+      "projectType": "library",
+      "root": "libs/style",
+      "sourceRoot": "libs/style/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/style/tsconfig.lib.json",
+              "libs/style/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/style/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/style/jest.config.js",
+            "tsConfig": "libs/style/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/style/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "context": {
+      "projectType": "library",
+      "root": "libs/context",
+      "sourceRoot": "libs/context/src",
+      "prefix": "classifieds-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/context/tsconfig.lib.json",
+              "libs/context/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/context/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/context/jest.config.js",
+            "tsConfig": "libs/context/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/context/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "classifieds"
+}

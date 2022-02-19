@@ -1,0 +1,12 @@
+<nb-chat [title]="recipientLabel" size="100%">
+  <nb-chat-message *ngFor="let msg of messages"
+                     type="text"
+                     [reply]="msg.senderId !== userId"
+                     [message]="msg.message"
+                     [sender]="msg.senderId === userId ? userLabel: recipientLabel"
+                     [date]="msg.createdAt">
+  </nb-chat-message>
+
+  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true" [showButton]="enableSend">
+  </nb-chat-form>
+</nb-chat>

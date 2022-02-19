@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@classifieds-ui/ads": ["libs/ads/src/index.ts"],
+      "@classifieds-ui/auth": ["libs/auth/src/index.ts"],
+      "@classifieds-ui/media": ["libs/media/src/index.ts"],
+      "@classifieds-ui/utils": ["libs/utils/src/index.ts"],
+      "@classifieds-ui/material": ["libs/material/src/index.ts"],
+      "@classifieds-ui/logging": ["libs/logging/src/index.ts"],
+      "@classifieds-ui/cities": ["libs/cities/src/index.ts"],
+      "@classifieds-ui/chat": ["libs/chat/src/index.ts"],
+      "@classifieds-ui/taxonomy": ["libs/taxonomy/src/index.ts"],
+      "@classifieds-ui/vocabulary": ["libs/vocabulary/src/index.ts"],
+      "@classifieds-ui/attributes": ["libs/attributes/src/index.ts"],
+      "@classifieds-ui/autos": ["libs/autos/src/index.ts"],
+      "@classifieds-ui/realestate": ["libs/realestate/src/index.ts"],
+      "@classifieds-ui/profiles": ["libs/profiles/src/index.ts"],
+      "@classifieds-ui/jsonschema": ["libs/jsonschema/src/index.ts"],
+      "@classifieds-ui/pages": ["libs/pages/src/index.ts"],
+      "@classifieds-ui/content": ["libs/content/src/index.ts"],
+      "@classifieds-ui/token": ["libs/token/src/index.ts"],
+      "@classifieds-ui/style": ["libs/style/src/index.ts"],
+      "@classifieds-ui/context": ["libs/context/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

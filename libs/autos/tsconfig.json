@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": ["**/*.ts", "../attributes/src/lib/services/car-query.service.spec.ts", "../attributes/src/lib/services/car-query.service.ts"]
+}
